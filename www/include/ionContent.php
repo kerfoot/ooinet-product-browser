@@ -47,7 +47,8 @@ function showPlatformDataProductStatus($pid) {
         return $html;
     }
 
-    $html .= '<table class="table table-bordered table-striped table-condensed">';
+    $html .= '<table id="data-products" class="table table-bordered table-striped table-condensed">';
+    $html .= '<thead>';
     $html .= '<tr>';
     $html .= '<th>Data Product</th>';
     $html .= '<th class="center">ERDDAP</th>';
@@ -61,7 +62,10 @@ function showPlatformDataProductStatus($pid) {
     $html .= '<th class="center">Status</th>';
     $html .= '<th class="center">Updated</th>';
     $html .= '</tr>';
+    $html .= '</thead>';
+
     usort($platform->{'children'}, "sortIonName");
+    $html .= '<tbody>';
     foreach ($platform->{'children'} as $dp) {
 
         $html .= '<tr>';
@@ -76,8 +80,9 @@ function showPlatformDataProductStatus($pid) {
         $html .= 'data-content="';
         $html .= $dp->{'name'};
         $html .= '"></i>&nbsp;';
-#        $html .= $dp->{'name'};
+        $html .= "<a class=\"data-product-params\" href=\"./?pid=${pid}\">";
         $html .= wordwrap($product, 70, '<br />');
+        $html .= '</a>';
         $html .= '</td>';
 
         # ERDDAP link
@@ -138,6 +143,85 @@ function showPlatformDataProductStatus($pid) {
         $html .= '</td>';
 
         $html .= '</tr>';
+
+    }
+    $html .= '</tbody>';
+    $html .= '</table>';
+
+    return $html;
+
+}
+
+function showDataProductParameters($pid, $pnum) {
+
+    $html = '';
+
+    list($obs, $platform) = explode('-', $pid);
+
+    $jsonFile = DP_ROOT . "/${obs}_dataProducts.cluster.json";
+    $json = json_decode(file_get_contents($jsonFile));
+
+    $platform = array();
+    foreach ($json->{'children'} as $child) {
+
+        if ($child->{'reference_designator'} == $pid) {
+            $platform = $child;
+        }
+
+    }
+
+    if (empty($platform)) {
+        return $html;
+    }
+
+    usort($platform->{'children'}, "sortIonName");
+
+    $params = $platform->{'children'}[$pnum]->{'children'};
+/*
+    print '<pre>';
+    print_r($params);
+    print '</pre>';
+*/
+
+    # Modification time
+    $modTime = gmstrftime('%Y-%m-%d %H:%M Z', filemtime($jsonFile));
+    $product = $platform->{'children'}[$pnum]->{'name'};
+    $html .= "<h2>$product Parameters</h2>";
+
+    $html .= '<table id="data-products" class="table table-bordered table-striped table-condensed">';
+    $html .= '<tr>';
+    $html .= '<th>Parameter</th>';
+    $html .= '<th class="center">Variable</th>';
+    $html .= '<th class="center">Units</th>';
+//    $html .= '<th class="center">Description</th>';
+    $html .= '</tr>';
+    foreach ($params as $param) {
+
+        $html .= '<tr>';
+
+        # Parameter display_name
+        $html .= '<td>';
+        $html .= '<i class="glyphicon glyphicon-info-sign" ';
+        $html .= 'rel="popover" ';
+        $html .= 'data-placement="left" ';
+        $html .= 'data-content="';
+        $html .= $param->{'description'};
+        $html .= '"></i>&nbsp;';
+        $html .= $param->{'display_name'};
+        $html .= '</td>';
+
+        # Variable Name
+        $html .= '<td class="center">';
+        $html .= $param->{'name'};
+        $html .= '</td>';
+
+        # Parameter Units
+        $html .= '<td>';
+        $html .= $param->{'units'};
+        $html .= '</td>';
+
+        $html .= '</tr>';
+
     }
     $html .= '</table>';
 

@@ -58,6 +58,15 @@ var Ooi = (function() {
 
         });
 
+        // Fetch Data Product parameters
+        $content.on('click', 'a.data-product-params', function(evt) {
+
+            evt.preventDefault();
+
+            _fetchDataProductParameters(this);
+
+        });
+
         // Add the map
         _MAP = L.map('map').setView(_DEFAULT_CENTER, 1);
         L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}.png').addTo(_MAP);
@@ -134,6 +143,27 @@ var Ooi = (function() {
         var platformUrl = _CONTENT_BASE_URL + '/' + Url.composeQuery(urlTokens.vars);
 
         var xhr = $.ajax({url : platformUrl,
+            dataType : 'html',
+            type : 'GET'
+        });
+
+        xhr.done(function(response) {
+            $content.html(response);
+        });
+
+    }
+
+    function _fetchDataProductParameters(link) {
+
+        var urlTokens = Url.decomposeUrl(link.href);
+
+        // Find the row number of the table and add it as the pnum
+        // variable
+        urlTokens.vars['pnum'] = $(link).closest('tr').index();
+
+        paramsUrl = _CONTENT_BASE_URL + '/' + Url.composeQuery(urlTokens.vars);
+
+        var xhr = $.ajax({url : paramsUrl,
             dataType : 'html',
             type : 'GET'
         });
