@@ -13,8 +13,10 @@ define('DP_ROOT', './json/observatoryDataProducts');
 <html lang="en">
 
 <head>
-<title>ION DataProduct Status</title>
 <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ION DataProduct Browser</title>
 
 <!--
 <meta name="author" content="John Kerfoot, johnkerfoot@gmail.com"/>
