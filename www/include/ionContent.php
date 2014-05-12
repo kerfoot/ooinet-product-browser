@@ -205,6 +205,9 @@ function showDataProductParameters($pid, $pnum) {
         $html .= 'rel="popover" ';
         $html .= 'data-placement="left" ';
         $html .= 'data-content="';
+        if (!$param->{'description'}) {
+            $param->{'description'} = 'No Description Provided';
+        }
         $html .= $param->{'description'};
         $html .= '"></i>&nbsp;';
         $html .= $param->{'display_name'};
