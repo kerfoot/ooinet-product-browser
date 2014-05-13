@@ -6,9 +6,14 @@
     font-size: 12px;
 }
 
-#content {
-    margin-top: 5px;
-}
+
+#content {        
+        border-top: 1px solid #9fabb7;
+        position: fixed;
+        top: 6%;
+        left: 25%;
+        width: 74%;        
+      }
 
 .center {
     text-align: center;
@@ -18,11 +23,17 @@ table {
     font-size: 13px;
 }
 
-#map {
-    height : 350px;
-    margin-top: 5px;
-    border: #000 1px solid;
-}
+#map {       
+    position: fixed;
+    width: 25%;
+    height: 40%;
+    border-right: 1px solid #9fabb7;
+    border-top: 1px solid #9fabb7;
+    top: 50%;
+    padding: 5px;
+    max-height: 40%;        
+    float:left;    
+      }      
 
 .polygon {
     stroke : black;
@@ -32,3 +43,20 @@ table {
     fill-opacity : 0.2;
 }
 
+#menu {       
+        position: fixed;
+        width: 25%;
+        height: 40%;
+        border-right: 1px solid #9fabb7;
+        border-top: 1px solid #9fabb7;
+        top: 6%;
+        padding: 5px;
+        overflow-y:auto;
+        min-height:100px;
+        max-height: 40%;        
+        float:left;    
+      }
+
+.glyphicon-collapse-down{
+    font-size: 26px;
+    }      
