@@ -28,6 +28,14 @@ function showPlatformDataProductStatus($pid) {
     list($obs, $platform) = explode('-', $pid);
 
     $jsonFile = DP_ROOT . "/${obs}_dataProducts.cluster.json";
+    if (!is_file($jsonFile)) {
+        $msg = '<div class="alert alert-danger">';
+        $msg .= '<h4>Observatory/PlatformSite Not Found</h4>';
+        $msg .= "The requested Observatory/PlatformSite: $pid could not be found.";
+        $msg .= '</div>';
+        return $msg;
+    }
+
     $json = json_decode(file_get_contents($jsonFile));
 
     # Modification time
