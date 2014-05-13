@@ -1,4 +1,4 @@
-OOINet Observatory DataProduct Browser
+OOINet DataProduct Browser
 ==========================
 
 Prototype browser application for viewing OOI DataProduct resources status
