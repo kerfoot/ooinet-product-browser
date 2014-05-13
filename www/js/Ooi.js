@@ -82,8 +82,13 @@ var Ooi = (function() {
             _MAP.setView(_DEFAULT_CENTER, 1);
 
             var $target = $(this);
+/*
             $target.siblings().removeClass('active');
+*/
 
+            $target.parent().siblings().find('i.glyphicon-ok').remove();
+            $target.append('&nbsp;<i class="glyphicon glyphicon-ok"></i>');
+/*
             if ($target.hasClass('active')) {
                 $target.removeClass('active');
                 $content.html('');
@@ -93,6 +98,7 @@ var Ooi = (function() {
                 $target.addClass('active');
                 $content.html('');
             }
+*/
 
             var urlTokens = Url.decomposeUrl(this.href);
             var siteUrl = _CONTENT_BASE_URL + '/' + Url.composeQuery(urlTokens.vars);

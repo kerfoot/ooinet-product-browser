@@ -6,6 +6,10 @@
     font-size: 12px;
 }
 
+#content {
+    margin-top: 5px;
+}
+
 .center {
     text-align: center;
 }
@@ -26,5 +30,13 @@ table {
     stroke-opacity : 1;
     fill : yellow;
     fill-opacity : 0.2;
+}
+
+.navbar {
+    margin-bottom: 5px !important;
+}
+
+#utc-clock {
+    margin-left: 15px;
 }
 
