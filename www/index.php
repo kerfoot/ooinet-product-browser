@@ -34,7 +34,7 @@ define('DP_ROOT', './json/observatoryDataProducts');
 
 <?php
 # Add header bar
-$html .= '<nav class="navbar navbar-inverse" role="navigation">';
+$html .= '<nav class="navbar navbar-inverse navbar-static-top" role="navigation">';
 $html .= '<div class="container-fluid">';
 $html .= '<div class="navbar-header">';
 $html .= '<a class="navbar-brand" href="#">ION DataProduct Status</a>';
